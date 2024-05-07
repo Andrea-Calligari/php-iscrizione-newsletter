@@ -1,7 +1,9 @@
 <?php
-//  array_key_exists('email', $_POST);
+//Verifico se il valore dell'input email é o no stringa vuota
+
 $email = $_POST['email'] ?? '';
- 
+
+//Funzione di controllo dei caratteri inseriti 
 
 function isRightChar($email){
     if(strpos($email, '@') && strpos($email, '.')){
@@ -9,17 +11,9 @@ function isRightChar($email){
     }else {
         return false;
     }
-};
- function isFirstTime($post){
-     if(array_key_exists('email', $_POST)){
-         return true;
-     }else{
-         return false;
-     }
- }
- isRightChar($email);
+}
+ 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -33,22 +27,30 @@ function isRightChar($email){
 </head>
 <body>
     <header> 
-    header
+        <section class="py-3 bg-dark">
+            <div class="container text-light">
+                <h1>NewsLetter</h1>
+            </div>
+        </section>
     </header>
     <main>
     <section>
-            <div class="container">
+        <!-- Controllo se la e-mail é corretta  -->
+            <div class="container bg-dark">
+                <!-- Se é corretta  -->
                 <?php if(isRightChar($email)){ ?>
-                    <div class="alert alert-primary">Email inserita con successo! </div>
-                <?php }else if(isFirstTime($email)){  ?>  
+                    <div class="alert alert-primary">Email inserita con successo! Ora fai parte della nostra community!</div>
+                <!-- Seno' controllo che l'array associativo ($_POST) abbia la chiave 'e-mail' -->
+                <?php }else if(array_key_exists('email', $_POST)){  ?>  
                  <div class="alert alert-primary">Inserire una mail con questi due caratteri "@" oppure "."</div>
                 <?php }?>
             </div>
         </section>
-        <section class="py-3">
-            <div class="container">
-                <form action="" method="POST">
-                    <input class="form-control" name="email" type="text" placehlder="inserisci qui la tua mail ">
+        <!-- Form -->
+        <section class="py-3 bg-dark">
+            <div class="container" >
+                <form action="" method="POST" class="d-flex gap-3" >
+                    <input class="form-control w-50" name="email" type="text" placehlder="inserisci qui la tua mail ">
                     <input class="btn btn-primary " type="submit" value="Iscriviti">
                 </form>
             </div>
