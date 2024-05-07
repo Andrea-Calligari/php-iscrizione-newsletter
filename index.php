@@ -1,18 +1,23 @@
 <?php
+//  array_key_exists('email', $_POST);
 $email = $_POST['email'] ?? '';
+ 
 
 function isRightChar($email){
     if(strpos($email, '@') && strpos($email, '.')){
-        echo ?> <div class="alert-success">La tua mail é stata registrata con successo!</div>;<?php $email ?>
-        <?php
         return true;
-    }elseif(strpos($email, '@') && strpos($email, '.') !== true){
-        echo ' la Mail deve contenere un carattere speciale tipo "@" o "."';
+    }else {
         return false;
     }
 };
-
-isRightChar($email);
+ function isFirstTime($post){
+     if(array_key_exists('email', $_POST)){
+         return true;
+     }else{
+         return false;
+     }
+ }
+ isRightChar($email);
 ?>
 
 
@@ -31,6 +36,15 @@ isRightChar($email);
     header
     </header>
     <main>
+    <section>
+            <div class="container">
+                <?php if(isRightChar($email)){ ?>
+                    <div class="alert alert-primary">Email inserita con successo! </div>
+                <?php }else if(isFirstTime($email)){  ?>  
+                 <div class="alert alert-primary">Inserire una mail con questi due caratteri "@" oppure "."</div>
+                <?php }?>
+            </div>
+        </section>
         <section class="py-3">
             <div class="container">
                 <form action="" method="POST">
@@ -39,6 +53,7 @@ isRightChar($email);
                 </form>
             </div>
         </section>
+       
     </main>
     <footer>
         footer
